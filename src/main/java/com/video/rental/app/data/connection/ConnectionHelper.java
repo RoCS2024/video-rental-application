@@ -25,10 +25,13 @@ public class ConnectionHelper {
             Class.forName(ORACLE_DRIVER).newInstance();
             return DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
             //LOGGER.error("Error has occurred. Driver not found.")
         } catch (InstantiationException | IllegalAccessException ex) {
+            ex.printStackTrace();
             //LOGGER.error("Error has occurred. Driver not found.")
         } catch (SQLException ex) {
+            ex.printStackTrace();
             //LOGGER.error("Error has occurred. Cannot connect to the database." + ex.getMessage())
         }
         return null;

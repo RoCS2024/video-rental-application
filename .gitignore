@@ -6,6 +6,7 @@ out/
 *.iml
 target/
 lib/
+build/
 
 ### Eclipse ###
 .apt_generated
