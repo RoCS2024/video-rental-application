@@ -1,0 +1,47 @@
+<project name="video-rental-application"
+         default="build"
+         xmlns:ivy = "antlib:org.apache.ivy.ant">
+
+    <property name="source" value="src/main/java"/>
+    <property name="build.dir" value="target"/>
+    <property name="doc.dir" value="${build.dir}/doc"/>
+    <property file="build.properties"/>
+
+    <target name="resolve" description="resolve dependencies">
+        <ivy:resolve/>
+        <ivy:retrieve/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="build" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <javac includeantruntime="false" destdir="${build.dir}" source="17" target="17">
+            <src path="${source}"/>
+        </javac>
+    </target>
+
+    <target name="generate-javadoc">
+        <javadoc packagenames="com.video.rental.app.*"
+                 sourcepath="${source}"
+                 destdir="${doc.dir}"
+                 version="${version}"
+                 windowtitle="Video Rental Application Documentation">
+            <fileset dir="."></fileset>
+            <doctitle><![CDATA[= Test Documentation =]]></doctitle>
+            <bottom>
+                <![CDATA[Copyright © ${copyright.year}. All Rights Reserved.]]>
+            </bottom>
+        </javadoc>
+        <echo message="java doc has been generated!" />
+    </target>
+
+    <target name="build-jar" depends="build">
+        <jar destfile="out/artifact/"
+             basedir="${build.dir}"
+        />
+    </target>
+
+</project>
