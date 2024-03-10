@@ -25,6 +25,7 @@ jobs:
       run: |
         cd /usr/share/ant/lib 
         wget https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.5.2/ivy-2.5.2.jar
+        wget https://repo1.maven.org/maven2/org/apache/ant/ant-junitlauncher/1.10.14/ant-junitlauncher-1.10.14.jar 
         mkdir junit
         cd /usr/share/ant/lib/junit
         wget https://repo1.maven.org/maven2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar
