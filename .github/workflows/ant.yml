@@ -23,6 +23,7 @@ jobs:
         distribution: 'temurin'
     - name: Install IVY
       run: |
+        cd /usr/share/ant/lib
         ls -a
     - name: Build with Ant
       run: ant -noinput -buildfile build.xml
