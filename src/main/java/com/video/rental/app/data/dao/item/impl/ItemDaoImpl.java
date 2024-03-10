@@ -1,6 +1,7 @@
 package com.video.rental.app.data.dao.item.impl;
 
 import com.video.rental.app.data.connection.ConnectionHelper;
+import com.video.rental.app.data.utils.QueryConstants;
 import com.video.rental.app.data.dao.item.ItemDao;
 import com.video.rental.app.model.item.Item;
 import org.slf4j.Logger;
@@ -12,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.video.rental.app.data.utils.QueryConstants.*;
 
 /**
  * An implementation class of the Item Data Access Object.
@@ -27,7 +26,7 @@ public class ItemDaoImpl implements ItemDao {
     public List<Item> getAllItems() {
         List<Item> itemList = new ArrayList<>();
         try (Connection con = new ConnectionHelper().getConnection()){
-            PreparedStatement statement = con.prepareStatement(GET_ALL_ITEMS_STATEMENT);
+            PreparedStatement statement = con.prepareStatement(QueryConstants.GET_ALL_ITEMS_STATEMENT);
             ResultSet rs= statement.executeQuery();
 
             while(rs.next()) {
@@ -46,7 +45,7 @@ public class ItemDaoImpl implements ItemDao {
     public Item getItemById(String id) {
         Item item = null;
         try (Connection con = new ConnectionHelper().getConnection()) {
-            PreparedStatement statement = con.prepareStatement(GET_ITEM_BY_ID_STATEMENT);
+            PreparedStatement statement = con.prepareStatement(QueryConstants.GET_ITEM_BY_ID_STATEMENT);
             statement.setString(1, id);
             ResultSet rs= statement.executeQuery();
 
@@ -66,7 +65,7 @@ public class ItemDaoImpl implements ItemDao {
     public List<Item> getItemsByIdList(List<String> ids) {
         List<Item> itemList = new ArrayList<>();
         try (Connection con = new ConnectionHelper().getConnection()) {
-            PreparedStatement statement = con.prepareStatement(GET_ITEMS_BY_IDS_STATEMENT + buildParameters(ids));
+            PreparedStatement statement = con.prepareStatement(QueryConstants.GET_ITEMS_BY_IDS_STATEMENT + buildParameters(ids));
             for(int i=1; i<=ids.size(); i++) {
                 statement.setString(i, ids.get(i-1));
             }
@@ -86,7 +85,7 @@ public class ItemDaoImpl implements ItemDao {
     public boolean addItem(Item item) {
         int result = 0;
         try (Connection con = new ConnectionHelper().getConnection()){
-            PreparedStatement statement = con.prepareStatement(ADD_ITEM_STATEMENT);
+            PreparedStatement statement = con.prepareStatement(QueryConstants.ADD_ITEM_STATEMENT);
             statement.setString(1, item.getId());
             statement.setString(2, item.getTitle());
             statement.setString(3, item.getGenre());
@@ -108,7 +107,7 @@ public class ItemDaoImpl implements ItemDao {
     public boolean updateItem(Item item) {
         int result = 0;
         try (Connection con = new ConnectionHelper().getConnection()) {
-            PreparedStatement statement = con.prepareStatement(UPDATE_ITEM_STATEMENT);
+            PreparedStatement statement = con.prepareStatement(QueryConstants.UPDATE_ITEM_STATEMENT);
             statement.setString(1, item.getTitle());
             statement.setString(2, item.getGenre());
             statement.setString(3, String.valueOf(item.getCopies()));
@@ -129,7 +128,7 @@ public class ItemDaoImpl implements ItemDao {
     public boolean deleteItemById(String id) {
         int result = 0;
         try (Connection con = new ConnectionHelper().getConnection()) {
-            PreparedStatement statement = con.prepareStatement(DELETE_ITEM_BY_ID_STATEMENT);
+            PreparedStatement statement = con.prepareStatement(QueryConstants.DELETE_ITEM_BY_ID_STATEMENT);
             statement.setString(1, id);
             result = statement.executeUpdate();
 

@@ -13,6 +13,11 @@
     <property name="test.reports.dir"  location="${build.dir}/test-reports"/>
     <property file="build.properties" location="build.properties"/>
 
+    <!-- Clean -->
+    <target name="clean" description="remove build directory">
+        <delete dir="${build.dir}"/>
+    </target>
+
     <!--Initialize build process-->
     <target name="init" depends="clean" description="resolve dependencies">
         <ivy:resolve/>
@@ -73,11 +78,6 @@
                 <pathelement location="${classes.dir}"/>
             </classpath>
         </java>
-    </target>
-
-    <!-- Clean -->
-    <target name="clean">
-        <delete dir="${build.dir}"/>
     </target>
 
     <!-- Create jar   -->
