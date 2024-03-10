@@ -23,6 +23,5 @@
         <dependency org="org.junit.jupiter" name="junit-jupiter-engine" rev="5.10.2"/>
         <dependency org="org.mockito" name="mockito-core" rev="5.8.0"/>
         <dependency org="net.bytebuddy" name="byte-buddy-dep" rev="1.13.0"/>
-        <dependency org="org.hamcrest" name="hamcrest" rev="2.2"/>
     </dependencies>
 </ivy-module>
