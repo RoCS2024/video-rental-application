@@ -14,7 +14,7 @@
     <property file="build.properties" location="build.properties"/>
 
     <!--Initialize build process-->
-    <target name="init" description="resolve dependencies">
+    <target name="init" depends="clean" description="resolve dependencies">
         <ivy:resolve/>
         <ivy:report todir='${ivy.reports.dir}' graph='false' xml='false'/>
         <ivy:cachepath pathid="compile.path" conf="compile"/>
@@ -40,22 +40,27 @@
         </javac>
     </target>
 
+    <path id="junit.libs">
+        <fileset dir="${ant.home}/lib/junit"/>
+    </path>
+
     <!--Run unit tests-->
     <target name="test" depends="compile-tests">
-        <junit printsummary="yes" haltonfailure="yes">
+        <echo message="${ant.home}" />
+        <junitlauncher printsummary="true" haltonfailure="yes">
             <classpath>
                 <path refid="test.path"/>
+                <path refid="junit.libs"/>
                 <pathelement path="${classes.dir}"/>
                 <pathelement path="${test.classes.dir}"/>
+                <pathelement path="${test.reports.dir}"/>
             </classpath>
-            <formatter type="xml"/>
-            <batchtest fork="yes" todir="${test.reports.dir}">
-                <fileset dir="${test.src.dir}">
-                    <include name="**/*Test*.java"/>
-                    <exclude name="**/AllTests.java"/>
-                </fileset>
-            </batchtest>
-        </junit>
+            <testclasses outputdir="${test.reports.dir}">
+                <fileset dir="${test.classes.dir}"/>
+                <listener type="legacy-brief" sendSysOut="true"/>
+                <listener type="legacy-xml" sendSysErr="true" sendSysOut="true"/>
+            </testclasses>
+        </junitlauncher>
     </target>
 
     <!-- Build   -->
