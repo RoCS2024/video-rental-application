@@ -7,6 +7,7 @@ out/
 target/
 lib/
 build/
+logs/
 
 ### Eclipse ###
 .apt_generated

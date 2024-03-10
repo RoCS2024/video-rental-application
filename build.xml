@@ -46,7 +46,6 @@
 
     <!--Run unit tests-->
     <target name="test" depends="compile-tests">
-        <echo message="${ant.home}" />
         <junitlauncher printsummary="true" haltonfailure="yes">
             <classpath>
                 <path refid="test.path"/>
@@ -83,8 +82,8 @@
 
     <!-- Create jar   -->
     <target name="build-jar" depends="build">
-        <jar destfile="out/artifact/"
-             basedir="${build.dir}" />
+        <jar destfile="${build.dir}/${ant.project.name}-${version}.jar"
+             basedir="${classes.dir}" />
     </target>
 
     <!-- Generate java documentation   -->
