@@ -1,5 +1,8 @@
 package com.video.rental.app.data.connection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,6 +20,8 @@ public class ConnectionHelper {
     /** The password used to connect to the database. */
     public static final String PASSWORD = "Changeme0";
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionHelper.class);
+
     /**
      * This method gets the connection from an Oracle database instance.
      * */
@@ -25,14 +30,11 @@ public class ConnectionHelper {
             Class.forName(ORACLE_DRIVER).newInstance();
             return DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-            //LOGGER.error("Error has occurred. Driver not found.")
+            LOGGER.error("Error has occurred. Driver not found." + ex.getMessage());
         } catch (InstantiationException | IllegalAccessException ex) {
-            ex.printStackTrace();
-            //LOGGER.error("Error has occurred. Driver not found.")
+            LOGGER.error("Error has occurred. Cannot create a database instance." + ex.getMessage());
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            //LOGGER.error("Error has occurred. Cannot connect to the database." + ex.getMessage())
+            LOGGER.error("Error has occurred. Cannot connect to the database." + ex.getMessage());
         }
         return null;
     }
