@@ -74,7 +74,7 @@
 
     <!-- Run the application -->
     <target name="run" depends="compile">
-        <java classname="com.video.rental.app.Main">
+        <java classname="com.video.rental.appl.Main">
             <classpath>
                 <path refid="runtime.path"/>
                 <pathelement location="${classes.dir}"/>
@@ -90,7 +90,7 @@
 
     <!-- Generate java documentation   -->
     <target name="generate-javadoc">
-        <javadoc packagenames="com.video.rental.app.*"
+        <javadoc packagenames="com.video.rental.appl.*"
                  sourcepath="${src.dir}"
                  destdir="${doc.dir}"
                  version="${version}"
