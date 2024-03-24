@@ -14,8 +14,10 @@
     <property file="build.properties" location="build.properties"/>
 
     <!-- Clean -->
-    <target name="clean" description="remove build directory">
-        <delete dir="${build.dir}"/>
+    <target name="clean" description="Remove temporary directories">
+        <delete includeemptydirs="true">
+            <fileset dir="." includes="${clean.dirs}"/>
+        </delete>
     </target>
 
     <!--Initialize build process-->
@@ -82,7 +84,7 @@
 
     <!-- Create jar   -->
     <target name="build-jar" depends="build">
-        <jar destfile="${build.dir}/${ant.project.name}-${version}.jar"
+        <jar destfile="${build.dir}/vra.jar"
              basedir="${classes.dir}" />
     </target>
 
@@ -101,5 +103,17 @@
         </javadoc>
         <echo message="java doc has been generated!" />
     </target>
+
+<!--    <target name="gen-pom" depends="init">-->
+<!--        <ivy:makepom ivyfile="ivy.xml" pomfile="${build.dir}/vra.pom">-->
+<!--            <mapping conf="default" scope="compile"/>-->
+<!--        </ivy:makepom>-->
+<!--    </target>-->
+
+<!--    <target name="ivy-publish" depends="build-jar, gen-pom" description="publish jar/source to maven repo">-->
+<!--        <ivy:publish resolver="local-m2" forcedeliver="true" overwrite="true" publishivy="false">-->
+<!--            <artifacts pattern="${build.dir}/[artifact].[ext]" />-->
+<!--        </ivy:publish>-->
+<!--    </target>-->
 
 </project>

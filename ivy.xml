@@ -4,7 +4,8 @@
             xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
     <info
             organisation="com.rogate"
-            module="video-rental"
+            module="vra"
+            revision="1.0"
             status="integration">
     </info>
 
@@ -14,6 +15,10 @@
         <conf name="test"    description="Required for test only" extends="runtime"/>
     </configurations>
 
+<!--    <publications>-->
+<!--        <artifact type="pom" ext="pom" />-->
+<!--        <artifact type="jar" ext="jar" />-->
+<!--    </publications>-->
     <dependencies>
 
         <!--Database connectivity-->
